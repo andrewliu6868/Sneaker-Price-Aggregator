@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: ../Dockerfile
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      REDIS_ADDR: ${REDIS_ADDR}
+      PORT: ${PORT}
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
